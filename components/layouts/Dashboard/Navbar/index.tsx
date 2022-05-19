@@ -21,42 +21,42 @@ const Navbar = (props: Props) => {
             </MantineNavbar.Section>
             <MantineNavbar.Section pt={SECTION_PADDING} pb={SECTION_PADDING}>
                 <MenuItem
-                    svgComponent={<SVG.Home />}
+                    svgComponent={<SVG.Home fill='purple' />}
                     label='Home'
                     href='/'
                 />
             </MantineNavbar.Section >
             <MantineNavbar.Section pt={SECTION_PADDING} pb={SECTION_PADDING} >
                 <MenuItem
-                    svgComponent={<SVG.Picks />}
+                    svgComponent={<SVG.Picks fill='purple' />}
                     label='Picks'
                     href='/picks'
                 />
             </MantineNavbar.Section>
             <MantineNavbar.Section pt={SECTION_PADDING} pb={SECTION_PADDING}>
                 <MenuItem
-                    svgComponent={<SVG.Leaderboards />}
+                    svgComponent={<SVG.Leaderboards fill='purple' />}
                     label='Leaderboards'
                     href='/leaderboards'
                 />
             </MantineNavbar.Section>
             <MantineNavbar.Section pt={SECTION_PADDING} pb={SECTION_PADDING}>
                 <MenuItem
-                    svgComponent={<SVG.Stats />}
+                    svgComponent={<SVG.Stats fill='purple' />}
                     label='Stats'
                     href='/'
                 />
             </MantineNavbar.Section>
             <MantineNavbar.Section pt={SECTION_PADDING} pb={SECTION_PADDING}>
                 <MenuItem
-                    svgComponent={<SVG.Info />}
+                    svgComponent={<SVG.Info fill='purple' />}
                     label='Info'
                     href='/'
                 />
             </MantineNavbar.Section>
             <MantineNavbar.Section pt={SECTION_PADDING} pb={SECTION_PADDING}>
                 <MenuItem
-                    svgComponent={<SVG.Gear />}
+                    svgComponent={<SVG.Gear fill='purple' />}
                     label='Settings'
                     href='/settings'
                 />

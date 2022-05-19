@@ -31,6 +31,7 @@ const Providers = ({ Component, pageProps }: any) => {
             'deep-blue': ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
             // or replace default theme color
             blue: ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
+            purple: ['#945AC1']
           },
 
           shadows: {

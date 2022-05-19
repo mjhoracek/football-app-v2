@@ -72,7 +72,7 @@ const Login = (props: Props) => {
                         pb={10}
                         {...loginForm.getInputProps('password')}
                     />
-                    <Button mt={10} mb={10} color='indigo' fullWidth type="submit">Log In</Button>
+                    <Button mt={20} mb={10} color='indigo' fullWidth type="submit">Log In</Button>
                 </form>
                 <Text mt={40} mb={10} color='indigo' align='center'> {message}</Text>
             </Container>
@@ -81,7 +81,3 @@ const Login = (props: Props) => {
 }
 
 export default Login
-
-function useAuth(): { login: any } {
-    throw new Error('Function not implemented.')
-}
