@@ -3,6 +3,7 @@ import { getDashboardLayout } from '../components/layouts/Dashboard'
 import nookies from 'nookies'
 import { firebaseAdmin } from '../utils/firebase/firebaseAdmin'
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next'
+import { useEffect, useState } from 'react'
 
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -39,10 +40,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 const Home = (props: any) => {
+  const [players, setPlayers] = useState([])
+
+  useEffect(() => {
+    const getPlayers = async () => {
+      const response = await fetch('http://localhost:5000/players/')
+      const players = await response.json()
+      setPlayers(players)
+    }
+
+    getPlayers()
+  }, [])
+
 
   return (
     <Box>
-      <h2>Home Page</h2>
+      <h1>Players from the DB</h1>
+      {players.map((player) => (
+        <p key={player.id}>{player.name}</p>
+      ))}
     </Box>
   )
 }
