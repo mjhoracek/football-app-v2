@@ -1,6 +1,8 @@
 import Head from "next/head"
 import type { NextPage } from 'next'
+import { colors } from "../styles/colors"
 import { MantineProvider } from '@mantine/core'
+import { theme } from "../styles/theme"
 import { AuthProvider } from "../components/contexts/AuthContext"
 
 
@@ -23,30 +25,26 @@ const Providers = ({ Component, pageProps }: any) => {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        theme={{
-          // Theme is deeply merged with default theme
-          colorScheme: 'dark',
-          colors: {
-            // Add your color
-            'deep-blue': ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
-            // or replace default theme color
-            blue: ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
-            purple: ['#945AC1']
-          },
+        theme={theme}
+        styles={{
+          Button: () => ({
+            root: {
+              backgroundColor: colors.purple[1],
+              fontFamily: "Chakra Petch, sans-serif",
+              letterSpacing: ".1rem",
 
-          shadows: {
-            // other shadows (xs, sm, lg) will be merged from default theme
-            md: '1px 1px 3px rgba(0,0,0,.25)',
-            xl: '5px 5px 3px rgba(0,0,0,.25)',
-          },
-
-          headings: {
-            fontFamily: 'Roboto, sans-serif',
-            sizes: {
-              h1: { fontSize: 30 },
+              '&:hover': {
+                backgroundColor: colors.purple[3]
+              }
             },
-          },
-        }}>
+            outline: {
+              "&:hover": {
+                borderColor: colors.purple[0],
+              },
+            },
+          }),
+        }}
+      >
         <App Component={Component} pageProps={pageProps} />
       </MantineProvider>
     </AuthProvider>

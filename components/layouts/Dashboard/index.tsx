@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import { AppShell, Box } from '@mantine/core'
 import Navbar from './Navbar'
-import Header from './Header'
 
 interface Props {
     children: ReactNode,
@@ -21,7 +20,6 @@ const DashboardLayout = ({ children }: Props) => {
             styles={{
                 main: {
                     backgroundColor: 'inherit',
-                    border: 'orange',
                     height: '100%'
                 }
             }}
