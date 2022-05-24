@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from '@mantine/form'
-import { Box, Button, Center, Container, Group, Text, TextInput, Title } from '@mantine/core'
+import { Box, Button, Center, Container, createStyles, Group, PasswordInput, Text, TextInput, Title } from '@mantine/core'
 import { useAuthState } from '../components/contexts/AuthContext'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { colors } from '../styles/colors'
 
+const useStyles = createStyles((theme) => ({
+    padded: {
+        paddingTop: '10px',
+        paddingBottom: '10px',
+    }
+}))
 
 type Props = {}
 
 const Login = (props: Props) => {
+    const { classes } = useStyles()
     const router = useRouter()
     const [message, setMessage] = useState(`Welcome To Mitch's Football Pool`)
     const { login, setCurrentUser, logout } = useAuthState()
@@ -24,7 +32,7 @@ const Login = (props: Props) => {
             const user = await login(loginForm.values.email, loginForm.values.password)
             if (user) {
                 setCurrentUser(user)
-                router.push('/dashboard')
+                router.push('/')
             }
         } catch (error) {
             console.log(error)
@@ -60,21 +68,19 @@ const Login = (props: Props) => {
                         required
                         label="Email"
                         placeholder='your@email.com'
-                        pt={10}
-                        pb={10}
+                        className={classes.padded}
                         {...loginForm.getInputProps('email')}
                     />
-                    <TextInput
+                    <PasswordInput
                         required
                         label="Password"
                         placeholder="Enter your Password"
-                        pt={10}
-                        pb={10}
+                        className={classes.padded}
                         {...loginForm.getInputProps('password')}
                     />
-                    <Button mt={20} mb={10} color='indigo' fullWidth type="submit">Log In</Button>
+                    <Button mt={20} mb={10} fullWidth type="submit">Log In</Button>
                 </form>
-                <Text mt={40} mb={10} color='indigo' align='center'> {message}</Text>
+                <Text mt={40} mb={10} color={colors.purple[2]} align='center'> {message}</Text>
             </Container>
         </Center>
     )
