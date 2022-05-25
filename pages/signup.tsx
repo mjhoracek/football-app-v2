@@ -30,19 +30,46 @@ const SignUpPage = (props: Props) => {
         }
     })
 
+    const createNewPlayer = async (url, data) => {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            console.log('createNewPlayer response:', response)
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
     const handleSubmit = async () => {
         try {
             ///for some reason firebase doesnt like using the mantine signUpForm.values.email/password as inputs to the signup function
             const email = signUpForm.values.email
             const password = signUpForm.values.password
             const user = await signup(email, password)
+            console.log('this is the new user we just made:', user)
+
             if (user) {
+                const uid = user?.user.multiFactor.user.uid
+                console.log('is there a uid?', uid)
+
+                const playerData = {
+                    player_name: signUpForm.values.name,
+                    email: signUpForm.values.email,
+                    player_password: signUpForm.values.password,
+                    firebase_UID: uid,
+                    // last_login: Date.now(), formatting is not correct for postgres
+                }
+
+                ///create a new player on the SQL DB
+                createNewPlayer('http://localhost:5000/players', playerData)
+
                 setCurrentUser(user)
                 router.push('/')
             }
-
-            /// const res = create a new player on the SQL DB
-            console.log('new user res', user)
 
         } catch (error) {
             setMessage(error.message)

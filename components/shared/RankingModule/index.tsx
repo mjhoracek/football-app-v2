@@ -56,12 +56,12 @@ const RankingModule = (props: Props) => {
         <Box className={classes.wrapper}>
             <Text pb={20} style={{ textAlign: 'center', fontWeight: 'bold', textDecoration: 'underline' }}>There are currently {players.length} players in the pool</Text>
             {players.map((player, i) => (
-                <Box key={player.id} className={classes.row}>
+                <Box key={player.player_id} className={classes.row}>
                     <Text className={classes.ranking}>
                         {i + 1}
                     </Text>
                     <Text className={classes.player}>
-                        {player.name}
+                        {player.player_name}
                     </Text>
                 </Box>
             ))}
