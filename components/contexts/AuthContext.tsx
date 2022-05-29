@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect, ReactNode } from "react"
 import app from '../../utils/firebase';
 import nookies from 'nookies'
 import firebase from 'firebase/compat/app';
+import { reauthenticateWithCredential } from 'firebase/auth'
+import { useRouter } from "next/router";
+
 
 
 type Props = {
@@ -28,7 +31,22 @@ export const AuthProvider = ({ children }: Props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    console.log('currentUser', currentUser)
+    const router = useRouter()
+
+
+    async function reAuth(password) {
+        const user = auth.currentUser;
+
+        try {
+            const credential = firebase.auth.EmailAuthProvider.credential(user.email, password)
+            const result = await reauthenticateWithCredential(user, credential).then(() => {
+            })
+        } catch (error) {
+            console.log(error.message)
+
+            router.push('/login')
+        }
+    }
 
     function signup(email, password) {
         return auth.createUserWithEmailAndPassword(email, password);
@@ -46,8 +64,13 @@ export const AuthProvider = ({ children }: Props) => {
         return auth.sendPasswordResetEmail(email);
     }
 
-    function updateEmail(email) {
-        return currentUser.updateEmail(email);
+    async function updateEmail(email) {
+        try {
+            currentUser.updateEmail(email);
+        } catch (error) {
+            console.log('update email error:', error.message)
+            router.push('/login')
+        }
     }
 
     function updatePassword(password) {
@@ -102,6 +125,7 @@ export const AuthProvider = ({ children }: Props) => {
         error,
         setError,
         loading,
+        reAuth,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
