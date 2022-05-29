@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import { colors } from "../styles/colors"
 import { MantineProvider } from '@mantine/core'
 import { theme } from "../styles/theme"
+import { NotificationsProvider } from "@mantine/notifications"
 import { AuthProvider } from "../components/contexts/AuthContext"
 
 
@@ -45,7 +46,9 @@ const Providers = ({ Component, pageProps }: any) => {
           }),
         }}
       >
-        <App Component={Component} pageProps={pageProps} />
+        <NotificationsProvider>
+          <App Component={Component} pageProps={pageProps} />
+        </NotificationsProvider>
       </MantineProvider>
     </AuthProvider>
   )
