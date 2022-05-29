@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useForm } from '@mantine/form'
 import { Button, Center, Container, Group, PasswordInput, Text, TextInput, Title } from '@mantine/core'
 import { useAuthState } from '../components/contexts/AuthContext'
@@ -54,7 +54,6 @@ const SignUpPage = (props: Props) => {
 
             if (user) {
                 const uid = user?.user.multiFactor.user.uid
-                console.log('is there a uid?', uid)
 
                 const playerData = {
                     player_name: signUpForm.values.name,

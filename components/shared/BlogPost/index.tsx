@@ -14,7 +14,8 @@ const useStyles = createStyles((theme) => ({
         alignItems: 'left',
         width: '90%',
         height: 'fit-content',
-        background: 'linear-gradient(180deg, #31343B 0%, #444444 100%)',
+        background: colors.background[0],
+        border: `1px solid ${colors.purple[2]}`,
         borderRadius: '10px',
     },
     header: {

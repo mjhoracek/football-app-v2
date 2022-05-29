@@ -28,6 +28,7 @@ const useStyles = createStyles((theme) => ({
   font: {
     fontSize: '28px',
     textAlign: 'center',
+    textTransform: 'uppercase',
   },
   gridBox: {
 
@@ -91,7 +92,6 @@ Home.getLayout = getDashboardLayout
 
 export default Home
 
-
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     const cookies = nookies.get(ctx);
@@ -99,7 +99,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
     // the user is authenticated!
     const { uid, email } = token;
-
 
     // FETCH STUFF HERE!! 🚀
 

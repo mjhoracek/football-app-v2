@@ -12,6 +12,7 @@ const useStyles = createStyles((theme) => ({
         alignItems: 'center',
         width: '100%',
         background: colors.background[0],
+        border: `1px solid ${colors.purple[2]}`,
         borderRadius: '10px',
         padding: '10px'
     },
