@@ -3,11 +3,7 @@ import { Group, Avatar, Text, Menu, UnstyledButton } from '@mantine/core';
 import { useAuthState } from '../../contexts/AuthContext';
 import { UserButton } from './UserButton';
 import Router, { useRouter } from 'next/router';
-import { NAVBAR_WIDTH } from '.';
 
-const logoutUser = () => {
-
-}
 
 const UserMenu = () => {
     const { logout, currentUser } = useAuthState()

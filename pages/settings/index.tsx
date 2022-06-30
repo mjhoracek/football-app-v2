@@ -72,7 +72,7 @@ type Props = {
 
 const SettingsPage = ({ userRow, uid }: Props) => {
     const { classes } = useStyles()
-    const { updateEmail, reAuth, updatePassword } = useAuthState()
+    const { updateEmail, reAuth, updatePassword, setCurrentUser, getUser } = useAuthState()
 
     const editProfile = useForm({
         initialValues: {
@@ -106,7 +106,7 @@ const SettingsPage = ({ userRow, uid }: Props) => {
 
         if (newEmail.length > 4) {
             try {
-                reAuth(password)
+                await reAuth(password)
                 updateEmail(newEmail)
 
                 const body = {
@@ -119,6 +119,7 @@ const SettingsPage = ({ userRow, uid }: Props) => {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(body),
                 })
+
                 showNotification({
                     title: 'Profile Updated Successfully!',
                     message: `Your name is ${editProfile.values.name} email is: ${editProfile.values.email}`,

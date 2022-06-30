@@ -4,6 +4,7 @@ import nookies from 'nookies'
 import firebase from 'firebase/compat/app';
 import { reauthenticateWithCredential } from 'firebase/auth'
 import { useRouter } from "next/router";
+import { showNotification } from "@mantine/notifications";
 
 
 
@@ -33,6 +34,10 @@ export const AuthProvider = ({ children }: Props) => {
     const [error, setError] = useState("");
     const router = useRouter()
 
+    async function getUser() {
+        const user = await firebase.auth().currentUser
+        return user
+    }
 
     async function reAuth(password) {
         const user = auth.currentUser;
@@ -44,7 +49,10 @@ export const AuthProvider = ({ children }: Props) => {
         } catch (error) {
             console.log(error.message)
 
-            router.push('/login')
+            showNotification({
+                message: error.message,
+                color: "red"
+            })
         }
     }
 
@@ -68,13 +76,27 @@ export const AuthProvider = ({ children }: Props) => {
         try {
             currentUser.updateEmail(email);
         } catch (error) {
-            console.log('update email error:', error.message)
-            router.push('/login')
+            console.log(error.message)
+
+            showNotification({
+                message: error.message,
+                color: "red"
+            })
         }
     }
 
-    function updatePassword(password) {
-        return currentUser.updatePassword(password);
+    async function updatePassword(password) {
+        try {
+            currentUser.updatePassword(password);
+        } catch (error) {
+            console.log(error.message)
+
+            showNotification({
+                message: error.message,
+                color: "red"
+            })
+        }
+
     }
 
     useEffect(() => {
@@ -126,6 +148,7 @@ export const AuthProvider = ({ children }: Props) => {
         setError,
         loading,
         reAuth,
+        getUser,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
